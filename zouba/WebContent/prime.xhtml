@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+
+	<h:form id="form">
+		<p:growl></p:growl>
+		<p:panel header="panel1">
+			<h:panelGrid columns="3">
+
+				<p:outputLabel id="out1" value="name" for="in1"></p:outputLabel>
+				<p:inputText id="in1" value="#{bean.player.name}" required="true"
+					requiredMessage="oblig">
+
+					<p:ajax event="blur" update="@this m1 out1"></p:ajax>
+
+				</p:inputText>
+				<p:message id="m1" for="in1"></p:message>
+
+				<p:outputLabel id="out2" value="login" for="in2"></p:outputLabel>
+				<p:inputText id="in2" value="#{bean.player.login}" required="true"
+					requiredMessage="oblig" validatorMessage="min max error">
+					<p:ajax event="blur" update="@this m2 out2"></p:ajax>
+
+					<f:validateLength minimum="4" maximum="7"></f:validateLength>
+
+				</p:inputText>
+				<p:message id="m2" for="in2"></p:message>
+
+
+
+				<p:outputLabel id="out3" value="age" for="in3"></p:outputLabel>
+				<p:inputText id="in3" value="#{bean.player.age}" required="true"
+					requiredMessage="oblig" validatorMessage="age non accepté">
+
+					<p:ajax event="blur" update="@this m3 out3"></p:ajax>
+					<f:validateDoubleRange minimum="12" maximum="25"></f:validateDoubleRange>
+				</p:inputText>
+				<p:message id="m3" for="in3"></p:message>
+
+			</h:panelGrid>
+
+
+			<p:commandButton value="add" action="#{bean.doAddPlayer()}"
+				update="@form"></p:commandButton>
+		</p:panel>
+
+
+	</h:form>
+
+
+
+</h:body>
+</html>
